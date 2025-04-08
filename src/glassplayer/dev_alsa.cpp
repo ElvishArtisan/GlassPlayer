@@ -2,7 +2,7 @@
 //
 // ALSA audio device for glassplayer(1)
 //
-//   (C) Copyright 2014-2016 Fred Gleason <fredg@paravelsystems.com>
+//   (C) Copyright 2014-2025 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -347,7 +347,7 @@ bool DevAlsa::start(QString *err)
   if(alsa_samplerate!=codec()->samplerate()) {
     if(global_log_verbose) {
       Log(LOG_INFO,
-	  QString().sprintf("using ALSA sample rate of %u samples/sec",
+	  QString::asprintf("using ALSA sample rate of %u samples/sec",
 			    alsa_samplerate));
     }
   }
@@ -360,7 +360,7 @@ bool DevAlsa::start(QString *err)
   if(alsa_channels!=codec()->channels()) {
     if(global_log_verbose) {
       Log(LOG_INFO,
-	  QString().sprintf("using ALSA channel count of %u",alsa_channels));
+	  QString::asprintf("using ALSA channel count of %u",alsa_channels));
     }
   }
 
@@ -373,7 +373,7 @@ bool DevAlsa::start(QString *err)
   if(alsa_period_quantity!=ALSA_PERIOD_QUANTITY) {
     if(global_log_verbose) {
       Log(LOG_INFO,
-	  QString().sprintf("using ALSA period quantity of %u",
+	  QString::asprintf("using ALSA period quantity of %u",
 			    alsa_period_quantity));
     }
   }
@@ -385,7 +385,7 @@ bool DevAlsa::start(QString *err)
   if(alsa_buffer_size!=(alsa_samplerate/2)) {
     if(global_log_verbose) {
       Log(LOG_INFO,
-	  QString().sprintf("using ALSA buffer size of %lu frames",
+	  QString::asprintf("using ALSA buffer size of %lu frames",
 			    alsa_buffer_size));
     }
   }
@@ -473,22 +473,22 @@ void DevAlsa::loadStats(QStringList *hdrs,QStringList *values,bool is_first)
     values->push_back(alsa_device);
 
     hdrs->push_back("Device|Channels");
-    values->push_back(QString().sprintf("%u",alsa_channels));
+    values->push_back(QString::asprintf("%u",alsa_channels));
 
     hdrs->push_back("Device|Samplerate");
-    values->push_back(QString().sprintf("%u",alsa_samplerate));
+    values->push_back(QString::asprintf("%u",alsa_samplerate));
 
     hdrs->push_back("Device|Buffer Size");
-    values->push_back(QString().sprintf("%lu",alsa_buffer_size));
+    values->push_back(QString::asprintf("%lu",alsa_buffer_size));
 
     hdrs->push_back("Device|Period Quantity");
-    values->push_back(QString().sprintf("%u",alsa_period_quantity));
+    values->push_back(QString::asprintf("%u",alsa_period_quantity));
   }
 
   hdrs->push_back("Device|PLL Offset");
-  values->push_back(QString().sprintf("%8.6lf",alsa_pll_offset));
+  values->push_back(QString::asprintf("%8.6lf",alsa_pll_offset));
 
   hdrs->push_back("Device|PLL Setpoint Frames");
-  values->push_back(QString().sprintf("%u",alsa_pll_setpoint_frames));
+  values->push_back(QString::asprintf("%u",alsa_pll_setpoint_frames));
 #endif  // ALSA
 }

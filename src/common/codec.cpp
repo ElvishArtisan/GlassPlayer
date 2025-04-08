@@ -2,7 +2,7 @@
 //
 // Abstract base class for audio codecs.
 //
-//   (C) Copyright 2014-2016 Fred Gleason <fredg@paravelsystems.com>
+//   (C) Copyright 2014-2025 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -142,15 +142,15 @@ void Codec::getStats(QStringList *hdrs,QStringList *values,bool is_first)
 
   if(is_first) {
     hdrs->push_back("Codec|Channels");
-    values->push_back(QString().sprintf("%u",codec_channels));
+    values->push_back(QString::asprintf("%u",codec_channels));
 
     hdrs->push_back("Codec|Samplerate");
-    values->push_back(QString().sprintf("%u",codec_samplerate));
+    values->push_back(QString::asprintf("%u",codec_samplerate));
   }
 
   if(codec_bytes_processed_changed) {
     hdrs->push_back("Codec|Bytes Processed");
-    values->push_back(QString().sprintf("%lu",codec_bytes_processed));
+    values->push_back(QString::asprintf("%lu",codec_bytes_processed));
     codec_bytes_processed_changed=false;
   }
 

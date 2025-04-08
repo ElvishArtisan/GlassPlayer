@@ -2,7 +2,7 @@
 //
 // JSON update generator
 //
-//   (C) Copyright 2019 Fred Gleason <fredg@paravelsystems.com>
+//   (C) Copyright 2019-2025 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -27,10 +27,10 @@ JsonEngine::JsonEngine()
 
 void JsonEngine::addEvent(const QString &str)
 {
-  QStringList f0=str.split("|",QString::KeepEmptyParts);
+  QStringList f0=str.split("|",Qt::KeepEmptyParts);
   QString key=f0.at(0);
   f0.removeFirst();
-  QStringList f1=f0.join("|").split(":",QString::KeepEmptyParts);
+  QStringList f1=f0.join("|").split(":",Qt::KeepEmptyParts);
   for(int i=2;i<f1.size();i++) {
     f1[1]+=":"+f1.at(i);
   }
@@ -44,7 +44,7 @@ void JsonEngine::addEvent(const QString &str)
 
 void JsonEngine::addEvents(const QString &str)
 {
-  QStringList f0=str.split("\n",QString::SkipEmptyParts);
+  QStringList f0=str.split("\n",Qt::SkipEmptyParts);
   for(int i=0;i<f0.size();i++) {
     addEvent(f0.at(i));
   }
@@ -76,7 +76,7 @@ QString JsonEngine::generate() const
       int num=it.value().at(1).toInt(&ok);
       if(ok) {
 	json+="        \""+JsonEngine::escape(it.value().at(0))+"\": "+
-	  QString().sprintf("%d,\r\n",num);
+	  QString::asprintf("%d,\r\n",num);
       }
       else {
 	json+="        \""+JsonEngine::escape(it.value().at(0))+"\": "+
@@ -107,7 +107,7 @@ QString JsonEngine::escape(const QString &str)
     QChar c=str.at(i);
     switch(c.category()) {
     case QChar::Other_Control:
-      ret+=QString().sprintf("\\u%04X",c.unicode());
+      ret+=QString::asprintf("\\u%04X",c.unicode());
       break;
 
     default:

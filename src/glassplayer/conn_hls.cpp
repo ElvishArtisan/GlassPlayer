@@ -2,7 +2,7 @@
 //
 // Server connector for HTTP live streams (HLS).
 //
-//   (C) Copyright 2014-2022 Fred Gleason <fredg@paravelsystems.com>
+//   (C) Copyright 2014-2025 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -124,38 +124,38 @@ void Hls::loadStats(QStringList *hdrs,QStringList *values,bool is_first)
   }
 
   hdrs->push_back("Connector|Download Speed");
-  values->push_back(QString().sprintf("%7.0f kbit/sec",
+  values->push_back(QString::asprintf("%7.0f kbit/sec",
 			 hls_download_average->average()/1000.0).trimmed());
 
   hdrs->push_back("Connector|HLS Version");
-  values->push_back(QString().sprintf("%d",hls_index_playlist->version()));
+  values->push_back(QString::asprintf("%d",hls_index_playlist->version()));
 
   hdrs->push_back("Connector|HLS Target Duration");
   values->
-    push_back(QString().sprintf("%d",hls_index_playlist->targetDuration()));
+    push_back(QString::asprintf("%d",hls_index_playlist->targetDuration()));
 
   hdrs->push_back("Connector|HLS Media Sequence");
   values->
-    push_back(QString().sprintf("%d",hls_index_playlist->mediaSequence()));
+    push_back(QString::asprintf("%d",hls_index_playlist->mediaSequence()));
 
   hdrs->push_back("Connector|HLS Segment Quantity");
   values->
-    push_back(QString().sprintf("%u",hls_index_playlist->segmentQuantity()));
+    push_back(QString::asprintf("%u",hls_index_playlist->segmentQuantity()));
 
   for(unsigned i=0;i<hls_index_playlist->segmentQuantity();i++) {
     if(!hls_index_playlist->segmentTitle(i).isEmpty()) {
-      hdrs->push_back(QString().sprintf("Connector|HLS Segment%u Title",i+1));
+      hdrs->push_back(QString::asprintf("Connector|HLS Segment%u Title",i+1));
       values->push_back(hls_index_playlist->segmentTitle(i));
     }
-    hdrs->push_back(QString().sprintf("Connector|HLS Segment%u Url",i+1));
+    hdrs->push_back(QString::asprintf("Connector|HLS Segment%u Url",i+1));
     values->push_back(hls_index_playlist->segmentUrl(i).toString());
 
-    hdrs->push_back(QString().sprintf("Connector|HLS Segment%u Duration",i+1));;
-    values->push_back(QString().
-		      sprintf("%8.5lf",hls_index_playlist->segmentDuration(i)));
+    hdrs->push_back(QString::asprintf("Connector|HLS Segment%u Duration",i+1));;
+    values->push_back(QString::asprintf("%8.5lf",
+			       hls_index_playlist->segmentDuration(i)));
 
     if(hls_index_playlist->segmentDateTime(i).isValid()) {
-      hdrs->push_back(QString().sprintf("Connector|HLS Segment%u DateTime",i+1));
+      hdrs->push_back(QString::asprintf("Connector|HLS Segment%u DateTime",i+1));
       values->push_back(hls_index_playlist->segmentDateTime(i).
 			toString("yyyy-mm-dd hh::mm:ss"));
     }

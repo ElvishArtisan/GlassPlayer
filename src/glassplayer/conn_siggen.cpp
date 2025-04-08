@@ -2,7 +2,7 @@
 //
 // Server connector for synthesized waveforms
 //
-//   (C) Copyright 2017-2021 Fred Gleason <fredg@paravelsystems.com>
+//   (C) Copyright 2017-2025 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -84,7 +84,7 @@ void SigGen::connectToHostConnector()
   //
   // Get parameters
   //
-  f0=serverUrl().path().split("/",QString::SkipEmptyParts);
+  f0=serverUrl().path().split("/",Qt::SkipEmptyParts);
   if(f0.size()!=2) {
     fprintf(stderr,"glassplayer: invalid url\n");
     exit(GLASS_EXIT_ARGUMENT_ERROR);
@@ -128,7 +128,7 @@ void SigGen::loadStats(QStringList *hdrs,QStringList *values,bool is_first)
     values->push_back("SigGen");
 
     hdrs->push_back("Connector|Frequency");
-    values->push_back(QString().sprintf("%u",siggen_frequency));
+    values->push_back(QString::asprintf("%u",siggen_frequency));
 
     hdrs->push_back("Connector|Level");
     values->push_back(siggen_level);

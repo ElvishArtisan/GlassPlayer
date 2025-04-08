@@ -2,7 +2,7 @@
 //
 // Server connector for Icecast/Shoutcast streams.
 //
-//   (C) Copyright 2014-2020 Fred Gleason <fredg@paravelsystems.com>
+//   (C) Copyright 2014-2025 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -95,8 +95,8 @@ void XCast::connectedData()
     SendHeader("POST "+serverMountpoint()+" HTTP/1.1");
   }
   SendHeader("Host: "+serverUrl().host()+":"+
-	     QString().sprintf("%u",serverUrl().port(80)));
-  SendHeader(QString().sprintf("icy-metadata: %d",streamMetadataEnabled()));
+	     QString::asprintf("%u",serverUrl().port(80)));
+  SendHeader(QString::asprintf("icy-metadata: %d",streamMetadataEnabled()));
   SendHeader("Accept: */*");
   SendHeader("User-Agent: glassplayer/"+QString(VERSION));
   SendHeader("Cache-control: no-cache");
@@ -106,7 +106,7 @@ void XCast::connectedData()
 	       Connector::base64Encode(serverUsername()+":"+serverPassword()));
   }
   if(!postData().isEmpty()) {
-    SendHeader(QString().sprintf("Content-length: %d",postData().toUtf8().
+    SendHeader(QString::asprintf("Content-length: %d",postData().toUtf8().
 				 length()));
   }
   SendHeader("");
@@ -171,7 +171,7 @@ void XCast::errorData(QAbstractSocket::SocketError err)
     setConnected(false);
     xcast_watchdog_retry_timer->start(XCAST_WATCHDOG_RETRY_INTERVAL);
     Log(LOG_WARNING,tr("server connection lost")+
-	QString().sprintf(" [error: %u], ",err)+tr("attempting reconnect"));
+	QString::asprintf(" [error: %u], ",err)+tr("attempting reconnect"));
     break;
   }
 }
@@ -245,7 +245,7 @@ void XCast::ProcessHeader(const QString &str)
     fprintf(stderr,"==> %s\n",(const char *)str.toUtf8());
   }
   if(xcast_result_code==0) {
-    f0=str.split(" ",QString::SkipEmptyParts);
+    f0=str.split(" ",Qt::SkipEmptyParts);
     if(f0.size()<3) {
       Log(LOG_ERR,"malformed response from server ["+str+"]");
       exit(GLASS_EXIT_SERVER_ERROR);
@@ -291,7 +291,7 @@ void XCast::ProcessHeader(const QString &str)
 void XCast::ProcessMetadata(const QByteArray &mdata)
 {
   if(mdata.length()>0) {
-    QStringList f0=QString(mdata).split(";",QString::SkipEmptyParts);
+    QStringList f0=QString(mdata).split(";",Qt::SkipEmptyParts);
     MetaEvent *meta=new MetaEvent();
     for(int i=0;i<f0.size();i++) {
       QStringList f1=f0[i].split("=");

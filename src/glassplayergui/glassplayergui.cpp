@@ -2,7 +2,7 @@
 //
 // glassplayergui(1) Audio Receiver front end
 //
-//   (C) Copyright 2016-2022 Fred Gleason <fredg@paravelsystems.com>
+//   (C) Copyright 2016-2025 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -224,7 +224,7 @@ void MainWidget::processFinishedData(int exit_code,QProcess::ExitStatus status)
     if(exit_code!=0) {
       QMessageBox::critical(this,"GlassPlayer",
 			    tr("Player process exited with non-zero exit code")+
-			    QString().sprintf(" [%d]!",exit_code));
+			    QString::asprintf(" [%d]!",exit_code));
       exit(256);
     }
     else {
@@ -269,7 +269,7 @@ void MainWidget::newJsonDocumentData(const QJsonDocument &doc)
 	    }
 	    else {
 	      gui_stats_dialog->update(obj.keys().at(0),keys.at(i),
-				       QString().sprintf("%d",v.toInt()));
+				       QString::asprintf("%d",v.toInt()));
 	    }
 	  }
       }
@@ -289,7 +289,7 @@ void MainWidget::logoProcessFinishedData(int exit_code,
     if(exit_code!=0) {
       fprintf(stderr,"glassplayergui: %s\n",(const char *)
 	      (tr("logo download process exited with non-zero exit code")+
-	       QString().sprintf(" [%d]!",exit_code)).toUtf8());
+	       QString::asprintf(" [%d]!",exit_code)).toUtf8());
     }
     else {
       QPixmap *pix=new QPixmap();
@@ -336,7 +336,7 @@ void MainWidget::resizeEvent(QResizeEvent *e)
 
   int edge=size().height()-42;
   int right=size().width()-145;
-  if(gui_logo_label->pixmap()!=NULL) {
+  if(!gui_logo_label->pixmap(Qt::ReturnByValueConstant()).isNull()) {
     right-=edge+10;
   }
 
@@ -407,7 +407,7 @@ void MainWidget::ProcessMetadataUpdates(const QJsonObject &obj)
     else {
       gui_metadata_labels[next_field]->setText(tr("Year")+":");
       gui_metadata_texts[next_field]->
-	setText(QString().sprintf("%d",obj.value("TALB").toInt()));
+	setText(QString::asprintf("%d",obj.value("TALB").toInt()));
     }
     next_field++;
   }

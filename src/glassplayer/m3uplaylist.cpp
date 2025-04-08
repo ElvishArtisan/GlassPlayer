@@ -2,7 +2,7 @@
 //
 // Abstract an M3U playlist
 //
-//   (C) Copyright 2016-2019 Fred Gleason <fredg@paravelsystems.com>
+//   (C) Copyright 2016-2025 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -137,7 +137,7 @@ bool M3uPlaylist::parse(const QByteArray &data,const QUrl &src)
   // Get Root URL
   //
   m3u_source=src;
-  f0=src.toString().split("/",QString::KeepEmptyParts);
+  f0=src.toString().split("/",Qt::KeepEmptyParts);
   f0.erase(f0.begin()+f0.size()-1);
   m3u_root=f0.join("/");
 
@@ -257,12 +257,12 @@ QString M3uPlaylist::dump() const
 
   if(m3u_extended) {
     ret+="#EXTM3U\r\n";
-    ret+=QString().sprintf("#EXT-X-TARGETDURATION:%d\r\n",m3u_target_duration);
+    ret+=QString::asprintf("#EXT-X-TARGETDURATION:%d\r\n",m3u_target_duration);
     if(m3u_version>=0) {
-      ret+=QString().sprintf("#EXT-X-VERSION:%d\r\n",m3u_version);
+      ret+=QString::asprintf("#EXT-X-VERSION:%d\r\n",m3u_version);
     }
     if(m3u_media_sequence>=0) {
-      ret+=QString().sprintf("#EXT-X-MEDIA-SEQUENCE:%d\r\n",m3u_media_sequence);
+      ret+=QString::asprintf("#EXT-X-MEDIA-SEQUENCE:%d\r\n",m3u_media_sequence);
     }
     if(m3u_ended) {
       ret+="#EXT-X-ENDLIST\r\n" ;
@@ -279,7 +279,7 @@ QString M3uPlaylist::dump() const
 	  m3u_segment_datetimes[i].toString("hh:mm:ss:zzz")+
 	  Connector::timezoneOffsetString()+"\r\n";
       }
-      ret+=QString().sprintf("#EXTINF:%7.5lf,",m3u_segment_durations[i])+
+      ret+=QString::asprintf("#EXTINF:%7.5lf,",m3u_segment_durations[i])+
 	m3u_segment_titles[i]+"\r\n";
     }
     ret+=m3u_segment_urls[i].toString()+"\r\n";

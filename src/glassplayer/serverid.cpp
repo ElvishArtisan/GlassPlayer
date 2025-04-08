@@ -2,7 +2,7 @@
 //
 // Identify remote server
 //
-//   (C) Copyright 2016-2019 Fred Gleason <fredg@paravelsystems.com>
+//   (C) Copyright 2016-2025 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -126,12 +126,12 @@ void ServerId::connectedData()
   else {
     SendHeader("POST "+id_url.path()+" HTTP/1.1");
   }
-  SendHeader("Host: "+id_url.host()+":"+QString().sprintf("%u",id_url.port(80)));
+  SendHeader("Host: "+id_url.host()+":"+QString::asprintf("%u",id_url.port(80)));
   SendHeader("Accept: */*");
   SendHeader("User-Agent: glassplayer/"+QString(VERSION));
   SendHeader("Cache-control: no-cache");
   SendHeader("Connection: close");
-  SendHeader(QString().sprintf("Content-Length: %d",id_post_data.toUtf8().length()));
+  SendHeader(QString::asprintf("Content-Length: %d",id_post_data.toUtf8().length()));
   if((!id_username.isEmpty())||(!id_password.isEmpty())) {
     SendHeader("Authorization: basic "+
 	       Connector::base64Encode(id_username+":"+id_password));
@@ -316,7 +316,7 @@ void ServerId::ProcessHeader(const QString &str)
   // fprintf(stderr,"%s\n",(const char *)str.toUtf8());
 
   if(id_result_code==0) {
-    f0=str.split(" ",QString::SkipEmptyParts);
+    f0=str.split(" ",Qt::SkipEmptyParts);
     if(f0.size()<3) {
       Log(LOG_ERR,"malformed response from server ["+str+"]");
       exit(GLASS_EXIT_SERVER_ERROR);

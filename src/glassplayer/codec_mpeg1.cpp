@@ -2,7 +2,7 @@
 //
 // MPEG-1 codec
 //
-//   (C) Copyright 2014-2016 Fred Gleason <fredg@paravelsystems.com>
+//   (C) Copyright 2014-2025 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -145,7 +145,7 @@ void CodecMpeg1::loadStats(QStringList *hdrs,QStringList *values,bool is_first)
     values->push_back("MPEG-1");
 
     hdrs->push_back("Codec|Layer");
-    values->push_back(QString().sprintf("%u",mpeg1_mad_header.layer));
+    values->push_back(QString::asprintf("%u",mpeg1_mad_header.layer));
 
     switch(mpeg1_mad_header.mode) {
     case MAD_MODE_STEREO:
@@ -170,10 +170,10 @@ void CodecMpeg1::loadStats(QStringList *hdrs,QStringList *values,bool is_first)
     }
 
     hdrs->push_back("Codec|Channels");
-    values->push_back(QString().sprintf("%u",channels()));
+    values->push_back(QString::asprintf("%u",channels()));
 
     hdrs->push_back("Codec|Bitrate");
-    values->push_back(QString().sprintf("%lu",mpeg1_mad_header.bitrate));
+    values->push_back(QString::asprintf("%lu",mpeg1_mad_header.bitrate));
 
     switch(mpeg1_mad_header.emphasis) {
     case MAD_EMPHASIS_NONE:

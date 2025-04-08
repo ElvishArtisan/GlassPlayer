@@ -2,7 +2,7 @@
 //
 // JACK audio device for glassplayer(1)
 //
-//   (C) Copyright 2014-2016 Fred Gleason <fredg@paravelsystems.com>
+//   (C) Copyright 2014-2025 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -311,12 +311,12 @@ bool DevJack::start(QString *err)
   // Register Ports
   //
   for(unsigned i=0;i<codec()->channels();i++) {
-    QString name=QString().sprintf("output_%d",i+1);
+    QString name=QString::asprintf("output_%d",i+1);
     jack_jack_ports[i]=
       jack_port_register(jack_jack_client,name.toUtf8(),JACK_DEFAULT_AUDIO_TYPE,
 			 JackPortIsOutput|JackPortIsTerminal,0);
   }
-  Log(LOG_INFO,QString().sprintf("connected to JACK graph at %u samples/sec.",
+  Log(LOG_INFO,QString::asprintf("connected to JACK graph at %u samples/sec.",
 				 jack_jack_sample_rate));
 
   //  jack_meter_timer->start(AUDIO_METER_INTERVAL);
@@ -357,19 +357,19 @@ void DevJack::loadStats(QStringList *hdrs,QStringList *values,bool is_first)
     values->push_back(jack_client_name);
 
     hdrs->push_back("Device|Samplerate");
-    values->push_back(QString().sprintf("%u",jack_jack_sample_rate));
+    values->push_back(QString::asprintf("%u",jack_jack_sample_rate));
 
     hdrs->push_back("Device|Buffer Size");
-    values->push_back(QString().sprintf("%u",jack_buffer_size));
+    values->push_back(QString::asprintf("%u",jack_buffer_size));
   }
   hdrs->push_back("Device|Frames Played");
-  values->push_back(QString().sprintf("%lu",jack_play_position));
+  values->push_back(QString::asprintf("%lu",jack_play_position));
 
   hdrs->push_back("Device|PLL Offset");
-  values->push_back(QString().sprintf("%8.6lf",jack_pll_offset));
+  values->push_back(QString::asprintf("%8.6lf",jack_pll_offset));
 
   hdrs->push_back("Device|PLL Setpoint Frames");
-  values->push_back(QString().sprintf("%u",jack_pll_setpoint_frames));
+  values->push_back(QString::asprintf("%u",jack_pll_setpoint_frames));
 #endif  // JACK
 }
 

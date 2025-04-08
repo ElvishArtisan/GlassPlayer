@@ -521,3 +521,5 @@
 	* Updated 'INSTALL'.
 2022-12-27 Fred Gleason <fredg@paravelsystems.com>
 	* Fixed a regression that broke the 'make deb' target.
+2025-04-08 Fred Gleason <fredg@paravelsystems.com>
+	* Cleaned up Qt5 warnings.

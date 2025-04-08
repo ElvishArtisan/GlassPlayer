@@ -2,7 +2,7 @@
 //
 // OggVorbis and OggOpus Codecs
 //
-//   (C) Copyright 2016-2022 Fred Gleason <fredg@paravelsystems.com>
+//   (C) Copyright 2016-2025 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -102,7 +102,7 @@ void CodecOgg::process(const QByteArray &data,bool is_last)
 	}
 	ogg_codec_type=CodecOgg::Opus;
 	if((ogg_opus_decoder=opus_decoder_create(samprate,chans,&err))==NULL) {
-	  Log(LOG_ERR,QString().sprintf("OggOpus decoder error %d",err));
+	  Log(LOG_ERR,QString::asprintf("OggOpus decoder error %d",err));
 	  exit(3);
 	}
 	setFramed(chans,samprate,0);
@@ -123,7 +123,7 @@ void CodecOgg::process(const QByteArray &data,bool is_last)
 	    if(!isprint(0xFF&ogg_op.packet[j])) {
 	      QByteArray str((const char *)ogg_op.packet+i,j-i);
 	      Log(LOG_ERR,
-		  QString().sprintf("Unsupported Ogg-encoded codec [%s]",
+		  QString::asprintf("Unsupported Ogg-encoded codec [%s]",
 				    str.constData()));
 	      exit(1);
 	    }
@@ -215,7 +215,7 @@ void CodecOgg::loadStats(QStringList *hdrs,QStringList *values,bool is_first)
     }
 
     hdrs->push_back("Codec|Channels");
-    values->push_back(QString().sprintf("%u",channels()));
+    values->push_back(QString::asprintf("%u",channels()));
 
     if(!QString(ogg_vendor_string).isEmpty()) {
       hdrs->push_back("Codec|Encoder");

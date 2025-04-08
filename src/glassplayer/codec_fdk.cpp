@@ -2,7 +2,7 @@
 //
 // AAC codec
 //
-//   (C) Copyright 2014-2020 Fred Gleason <fredg@paravelsystems.com>
+//   (C) Copyright 2014-2025 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -147,14 +147,14 @@ void CodecFdk::loadStats(QStringList *hdrs,QStringList *values,bool is_first)
     values->push_back("AAC");
 
     hdrs->push_back("Codec|AOT");
-    values->push_back(QString().sprintf("%u",fdk_cinfo->aot));
+    values->push_back(QString::asprintf("%u",fdk_cinfo->aot));
 
     hdrs->push_back("Codec|Channels");
-    values->push_back(QString().sprintf("%u",fdk_cinfo->numChannels));
+    values->push_back(QString::asprintf("%u",fdk_cinfo->numChannels));
   }
 
   hdrs->push_back("Codec|Transport Sync Errors");
-  values->push_back(QString().sprintf("%lu",fdk_sync_errors_count));
+  values->push_back(QString::asprintf("%lu",fdk_sync_errors_count));
 #endif  // HAVE_FDKAAC
 }
 

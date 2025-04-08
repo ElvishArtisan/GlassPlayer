@@ -2,7 +2,7 @@
 //
 // Abstract base class for streaming server connections.
 //
-//   (C) Copyright 2014-2020 Fred Gleason <fredg@paravelsystems.com>
+//   (C) Copyright 2014-2025 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -306,7 +306,7 @@ void Connector::getStats(QStringList *hdrs,QStringList *values,bool is_first)
 
   if(conn_dropouts_changed) {
     hdrs->push_back("Connector|Dropouts");
-    values->push_back(QString().sprintf("%u",conn_dropouts));
+    values->push_back(QString::asprintf("%u",conn_dropouts));
     conn_dropouts_changed=false;
   }
 
@@ -421,7 +421,7 @@ QString Connector::subMountpointName(const QString &mntpt,unsigned bitrate)
   if((f0[f0.size()-1]=="m3u")||(f0[f0.size()-1]=="m3u8")) {
     offset=1;
   }
-  f0.insert(f0.begin()+f0.size()-offset,QString().sprintf("%u",bitrate));
+  f0.insert(f0.begin()+f0.size()-offset,QString::asprintf("%u",bitrate));
   return f0.join(".");
 }
 
@@ -522,10 +522,10 @@ QString Connector::timezoneOffsetString()
   lt=mktime(localtime(&t));
 
   if(gmt<lt) {
-    ret=QString().sprintf("-%02ld:%02ld",(lt-gmt)/3600,((lt-gmt)%3600)/60);
+    ret=QString::asprintf("-%02ld:%02ld",(lt-gmt)/3600,((lt-gmt)%3600)/60);
   }
   if(gmt>lt) {
-    ret=QString().sprintf("+%02ld:%02ld",(gmt-lt)/3600,((gmt-lt)%3600)/60);
+    ret=QString::asprintf("+%02ld:%02ld",(gmt-lt)/3600,((gmt-lt)%3600)/60);
   }
 
   return ret;
@@ -598,7 +598,7 @@ QString Connector::urlEncode(const QString &str)
       ret+=str.mid(i,1);
     }
     else {
-      ret+=QString().sprintf("%%%02X",str.at(i).toLatin1());
+      ret+=QString::asprintf("%%%02X",str.at(i).toLatin1());
     }
   }
 
@@ -1080,7 +1080,7 @@ QString Connector::curlStrError(int exit_code)
     break;
 
   default:
-    ret=tr("Unknown CURL error")+QString().sprintf(" [%d]",exit_code);
+    ret=tr("Unknown CURL error")+QString::asprintf(" [%d]",exit_code);
   }
 
   return ret;
@@ -1256,13 +1256,13 @@ QString Connector::httpStrError(int status_code)
     break;
   }
 
-  return QString().sprintf("%d - ",status_code)+ret;
+  return QString::asprintf("%d - ",status_code)+ret;
 }
 
 
 QString Connector::socketErrorText(QAbstractSocket::SocketError err)
 {
-  QString ret=tr("Unknown socket error")+QString().sprintf(" [%u]",err);
+  QString ret=tr("Unknown socket error")+QString::asprintf(" [%u]",err);
 
   switch(err) {
   case QAbstractSocket::ConnectionRefusedError:
@@ -1315,7 +1315,7 @@ QString Connector::socketErrorText(QAbstractSocket::SocketError err)
 
 QString Connector::processErrorText(QProcess::ProcessError err)
 {
-  QString ret=tr("Unknown process error")+QString().sprintf("[%u]",err);
+  QString ret=tr("Unknown process error")+QString::asprintf("[%u]",err);
 
   switch(err) {
   case QProcess::FailedToStart:

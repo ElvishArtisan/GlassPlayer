@@ -2,7 +2,7 @@
 //
 // glassplayer(1) Audio Encoder
 //
-//   (C) Copyright 2014-2022 Fred Gleason <fredg@paravelsystems.com>
+//   (C) Copyright 2014-2025 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -329,12 +329,12 @@ void MainObject::codecFramedData(unsigned chans,unsigned samprate,
   if(global_log_verbose) {
     if(bitrate==0) {
       Log(LOG_INFO,"Using "+Codec::typeText(sir_codec->type())+
-	  QString().sprintf(" decoder, %u channels, %u samples/sec",
+	  QString::asprintf(" decoder, %u channels, %u samples/sec",
 			    chans,samprate));
     }
     else {
       Log(LOG_INFO,"Using "+Codec::typeText(sir_codec->type())+
-	  QString().sprintf(" decoder, %u channels, %u samples/sec, %u kbps",
+	  QString::asprintf(" decoder, %u channels, %u samples/sec, %u kbps",
 			    chans,samprate,bitrate));
     }
   }
@@ -457,11 +457,11 @@ void MainObject::meterData()
   sir_audio_device->meterLevels(lvls);
   switch(sir_codec->channels()) {
   case 1:
-    hex=QString().sprintf("ME %04X%04X",0xFFFF&lvls[0],0xFFFF&lvls[0]);
+    hex=QString::asprintf("ME %04X%04X",0xFFFF&lvls[0],0xFFFF&lvls[0]);
     break;
 
   case 2:
-    hex=QString().sprintf("ME %04X%04X",0xFFFF&lvls[0],0xFFFF&lvls[1]);
+    hex=QString::asprintf("ME %04X%04X",0xFFFF&lvls[0],0xFFFF&lvls[1]);
     break;
   }
   if(sir_json) {

@@ -2,7 +2,7 @@
 //
 // Abstract base class for audio output sources.
 //
-//   (C) Copyright 2014-2016 Fred Gleason <fredg@paravelsystems.com>
+//   (C) Copyright 2014-2025 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -65,7 +65,7 @@ void AudioDevice::getStats(QStringList *hdrs,QStringList *values,bool is_first)
 {
   if(audio_play_position_changed) {
     hdrs->push_back("Device|Frames Played");
-    values->push_back(QString().sprintf("%lu",audio_play_position));
+    values->push_back(QString::asprintf("%lu",audio_play_position));
     audio_play_position_changed=false;
   }
 
@@ -74,7 +74,7 @@ void AudioDevice::getStats(QStringList *hdrs,QStringList *values,bool is_first)
   unsigned space=codec()->ring()->readSpace();
   if(space!=audio_ring_read_space_prev) {
     hdrs->push_back("Device|PLL Current Frames");
-    values->push_back(QString().sprintf("%u",space));
+    values->push_back(QString::asprintf("%u",space));
     audio_ring_read_space_prev=space;
   }
 }
@@ -291,7 +291,7 @@ void AudioDevice::remixChannels(float *pcm_out,unsigned chans_out,float *pcm_in,
     return;
   }
   Log(LOG_ERR,
-      QString().sprintf("invalid channel remix: chans_in: %d  chans_out: %d",
+      QString::asprintf("invalid channel remix: chans_in: %d  chans_out: %d",
 			chans_in,chans_out));
   exit(GLASS_EXIT_CHANNEL_ERROR);
 }
