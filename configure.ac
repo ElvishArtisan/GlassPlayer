@@ -4,7 +4,7 @@ dnl Autoconf configuration
 dnl
 dnl Use autoconf to process this into a configure script
 dnl
-dnl   (C) Copyright 2014-2019 Fred Gleason <fredg@paravelsystems.com>
+dnl   (C) Copyright 2014-2025 Fred Gleason <fredg@paravelsystems.com>
 dnl
 dnl   This program is free software; you can redistribute it and/or modify
 dnl   it under the terms of the GNU General Public License version 2 as
@@ -67,10 +67,11 @@ AC_ARG_ENABLE(docbook,[  --disable-docbook       disable building of DocBook doc
 #
 # Check for Qt (Mandatory)
 #
-PKG_CHECK_MODULES(QT5CLI,Qt5Core Qt5Network,[],[AC_MSG_ERROR([*** Qt5 not found ***])])
-PKG_CHECK_MODULES(QT5GUI,Qt5Widgets Qt5Gui Qt5Core Qt5Network,[],[AC_MSG_ERROR([*** Qt5 not found ***])])
-AC_CHECK_PROG(MOC_NAME,moc-qt5,[moc-qt5],[moc])
-AC_SUBST(MOC,$MOC_NAME)
+AQ_FIND_QT6(QT6,Core Gui Widgets Network,[],[AC_MSG_ERROR([*** Qt6 not found ***])])
+#PKG_CHECK_MODULES(QT6CLI,Qt6Core Qt6Network,[],[AC_MSG_ERROR([*** Qt6 not found ***])])
+#PKG_CHECK_MODULES(QT6GUI,Qt6Widgets Qt6Gui Qt6Core Qt6Network,[],[AC_MSG_ERROR([*** Qt6 not found ***])])
+#AC_CHECK_PROG(MOC_NAME,moc-qt6,[moc-qt6],[moc])
+#AC_SUBST(MOC,$MOC_NAME)
 
 #
 # Check for LibCurl

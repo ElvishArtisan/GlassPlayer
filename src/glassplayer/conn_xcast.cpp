@@ -106,7 +106,7 @@ void XCast::connectedData()
 	       Connector::base64Encode(serverUsername()+":"+serverPassword()));
   }
   if(!postData().isEmpty()) {
-    SendHeader(QString::asprintf("Content-length: %d",postData().toUtf8().
+    SendHeader(QString::asprintf("Content-length: %lld",postData().toUtf8().
 				 length()));
   }
   SendHeader("");

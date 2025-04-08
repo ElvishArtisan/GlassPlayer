@@ -131,7 +131,7 @@ void ServerId::connectedData()
   SendHeader("User-Agent: glassplayer/"+QString(VERSION));
   SendHeader("Cache-control: no-cache");
   SendHeader("Connection: close");
-  SendHeader(QString::asprintf("Content-Length: %d",id_post_data.toUtf8().length()));
+  SendHeader(QString::asprintf("Content-Length: %lld",id_post_data.toUtf8().length()));
   if((!id_username.isEmpty())||(!id_password.isEmpty())) {
     SendHeader("Authorization: basic "+
 	       Connector::base64Encode(id_username+":"+id_password));
@@ -348,7 +348,7 @@ QTcpSocket *ServerId::CreateSocket()
   QTcpSocket *sock=new QTcpSocket(this);
   connect(sock,SIGNAL(connected()),this,SLOT(connectedData()));
   connect(sock,SIGNAL(readyRead()),this,SLOT(readyReadData()));
-  connect(sock,SIGNAL(error(QAbstractSocket::SocketError)),
+  connect(sock,SIGNAL(errorOccurred(QAbstractSocket::SocketError)),
 	  this,SLOT(errorData(QAbstractSocket::SocketError)));
   return sock;
 }

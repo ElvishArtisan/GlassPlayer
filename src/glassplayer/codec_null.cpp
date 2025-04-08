@@ -2,7 +2,7 @@
 //
 // Null codec that dumps the bitstream to standard output.
 //
-//   (C) Copyright 2014-2016 Fred Gleason <fredg@paravelsystems.com>
+//   (C) Copyright 2014-2025 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -61,7 +61,7 @@ bool CodecNull::acceptsFormatIdentifier(const QString &str) const
 void CodecNull::process(const QByteArray &data,bool is_last)
 {
   if(write(1,data.data(),data.length()!=1)) {
-    fprintf(stderr,"xrun: lost %d bytes\n",data.length());
+    fprintf(stderr,"xrun: lost %lld bytes\n",data.length());
   }
   if(is_last) {
     exit(0);

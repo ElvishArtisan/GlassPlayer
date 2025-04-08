@@ -5,7 +5,7 @@ MANDATORY PREREQUISITES
 You will need the following installed and configured properly on your 
 system before building GlassCoder:
 
-Qt5 Toolkit, v5.9 or better (http://www.qt.io/).
+Qt6 Toolkit, v6.2 or better (http://www.qt.io/).
 
 Curl, v7.29.0 or better (https://curl.se/)
 Command line tool and library for transferring data with URLs
@@ -14,7 +14,7 @@ Secret Rabbit Code (http://www.mega-nerd.com/SRC/)
 A sample-rate converter library, written by Erik de Castro Lopo.
 
 GNU LibTool libltdl
-A script for generic shared library support.  Information is available at
+A script for generic shared library support. Information is available at
 https://www.gnu.org/software/libtool/manual/html_node/Using-libltdl.html#Using-libltdl.
 
 TagLib Audio Meta-Data Library, v1.8.0 or better (https://taglib.org/)
@@ -25,16 +25,16 @@ formats.
 OPTIONAL PREREQUISITES
 ---------------------------------------------------------------------------
 GlassCoder depends upon various third-party libraries to provide support
-for both decoding formats ('codecs') and some audio destinations.  You will
+for both decoding formats ('codecs') and some audio destinations. You will
 need at least one of each in order to build a functioning binary.
 
 
 CODECS
 ------
-FDK-AAC - Fraunhofer FDK AAC codec for Android.  A codec for decoding
-MPEG-4 HE-AAC+ streams.  Available at https://github.com/mstorsjo/fdk-aac.
+FDK-AAC - Fraunhofer FDK AAC codec for Android. A codec for decoding
+MPEG-4 HE-AAC+ streams. Available at https://github.com/mstorsjo/fdk-aac.
 
-LibMad - A library for decoding MPEG-1 bitstreams.  Available at
+LibMad - A library for decoding MPEG-1 bitstreams. Available at
 http://www.underbit.com/products/mad/.
 
 OggOpus and OggVorbis -  Free, patent-clear audio codecs. 
@@ -49,14 +49,14 @@ Available at http://www.xiph.org.
 
 AUDIO DESTINATIONS
 ------------------
-Advanced Linux Sound Architecture (ALSA), v1.0 or later.  Included in
-virtually all Linux distros.  Further information is available at
+Advanced Linux Sound Architecture (ALSA), v1.0 or later. Included in
+virtually all Linux distros. Further information is available at
 http://www.alsa-project.org/.
 
-JACK Audio Connection Kit (JACK).  System for interconnecting audio devices
-and applications.  Available at http://jackaudio.org/.
+JACK Audio Connection Kit (JACK). System for interconnecting audio devices
+and applications. Available at http://jackaudio.org/.
 
-LibSndFile (FILE), v1.0.20 or later.  Library for reading audio files.
+LibSndFile (FILE), v1.0.20 or later. Library for reading audio files.
 Available at http://mega-nerd.com/libsndfile/.
 
 Windows Multimedia Extensions. Included in the MinGW build environment
@@ -65,19 +65,19 @@ for building Windows binaries on Linux.
 
 DOCUMENTATION
 -------------
-The GlassPlayer man pages are written in XML-DocBook5.  Pre-generated troff
+The GlassPlayer man pages are written in XML-DocBook5. Pre-generated troff
 versions are included in the source tarball, so special tools will not
-normally be required to install them.  However, if you need to rebuild them
+normally be required to install them. However, if you need to rebuild them
 (either because you've modified the DocBook sources or are installing from
 the primary GitHub repository), then you will need the following:
 
-XML-DocBook5 Stylesheets.  Available at 
-http://sourceforge.net/projects/docbook/.  You will also need to create a
+XML-DocBook5 Stylesheets. Available at 
+http://sourceforge.net/projects/docbook/. You will also need to create a
 $DOCBOOK_STYLESHEETS variable in you environment that points to the top
-of the stylesheet tree.  More information can be found at
+of the stylesheet tree. More information can be found at
 http://www.docbook.org/tdg5/en/html/appa.html#s.stylesheetinstall.
 
-xsltproc.  Command line XSLT processor.  Available at
+xsltproc. Command line XSLT processor. Available at
 http://xmlsoft.org/XSLT/xsltproc2.html
 
 
@@ -85,8 +85,8 @@ INSTALLATION
 ------------
 Once the prerequisites are set up, building and installation of the code is
 done by cd'ing to the top of the source tree and typing './configure
-[options]', 'make', followed (as root) by 'make install'.  Those who
-obtained the source via CVS will need to do './autogen.sh' first.  There
+[options]', 'make', followed (as root) by 'make install'. Those who
+obtained the source via CVS will need to do './autogen.sh' first. There
 are a number of options for the 'configure' script; do './configure --help'
 for a detailed list.
 
@@ -95,5 +95,4 @@ DISTRIBUTION NOTES
 
 Ubuntu
 ------
-
 Required build packages: libopus-devel libvorbis-devel libmad0-dev
