@@ -55,9 +55,6 @@ QString JsonEngine::generate() const
 {
   QString key="";
   QString json="";
-  /*
-   * FIXME: Rewrite using Qt JSON methods
-   *
   bool ok=false;
 
   if(json_events.size()>0) {
@@ -91,7 +88,7 @@ QString JsonEngine::generate() const
     json+="    }\r\n";
     json+="}\r\n";
   }
-  */
+
   return json;
 }
 
