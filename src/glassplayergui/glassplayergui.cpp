@@ -199,7 +199,7 @@ void MainWidget::processStart(const QString &url, const QStringList &pt_args)
   gui_player_process=new QProcess(this);
   gui_player_process->setReadChannel(QProcess::StandardOutput);
   connect(gui_player_process,SIGNAL(readyRead()),this,SLOT(processReadyReadData()));
-  connect(gui_player_process,SIGNAL(error(QProcess::ProcessError)),
+  connect(gui_player_process,SIGNAL(errorOccurred(QProcess::ProcessError)),
 	  this,SLOT(processErrorData(QProcess::ProcessError)));
   connect(gui_player_process,SIGNAL(finished(int,QProcess::ExitStatus)),
 	  this,SLOT(processFinishedData(int,QProcess::ExitStatus)));

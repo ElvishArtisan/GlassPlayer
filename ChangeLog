@@ -527,3 +527,5 @@
 	* Updated Qt5 dependency to Qt6.
 2025-04-08 Fred Gleason <fredg@paravelsystems.com>
 	* Restored JSON generation code in glassplayer(1).
+2025-04-08 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed signal/slot connection errors in glassplayergui(1).

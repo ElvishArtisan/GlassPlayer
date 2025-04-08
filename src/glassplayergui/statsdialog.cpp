@@ -29,7 +29,7 @@ StatsDialog::StatsDialog(QWidget *parent)
   stats_category_label->setFont(label_font);
   stats_category_label->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
   stats_category_box=new ComboBox(this);
-  connect(stats_category_box,SIGNAL(activated(const QString &)),
+  connect(stats_category_box,SIGNAL(textActivated(const QString &)),
 	  this,SLOT(categoryActivatedData(const QString &)));
 
   setWindowTitle("GlassPlayer - "+tr("Stream Statistics"));
