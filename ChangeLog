@@ -529,3 +529,6 @@
 	* Restored JSON generation code in glassplayer(1).
 2025-04-08 Fred Gleason <fredg@paravelsystems.com>
 	* Fixed signal/slot connection errors in glassplayergui(1).
+2025-04-09 Fred Gleason <fredg@paravelsystems.com>
+	* Refactored JSON generation code in glassplayer(1) to use native
+	Qt classes.
